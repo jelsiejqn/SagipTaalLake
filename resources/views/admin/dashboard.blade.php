@@ -1,31 +1,34 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Admin Dashboard')
 
 @section('content')
-<h1 style="margin-bottom: 1.5rem;">Admin Dashboard</h1>
+<div class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <p>Welcome back! Here's what's happening with your organization.</p>
+</div>
 
-<div class="grid grid-4" style="margin-bottom: 2rem;">
-    <div class="card" style="text-align: center;">
-        <h3 style="font-size: 2.5rem; color: #2c5f2d; margin-bottom: 0.5rem;">{{ $totalEvents }}</h3>
-        <p style="color: #666;">Total Events</p>
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-number">{{ $totalEvents }}</div>
+        <div class="stat-label">Total Events</div>
     </div>
-    <div class="card" style="text-align: center;">
-        <h3 style="font-size: 2.5rem; color: #2c5f2d; margin-bottom: 0.5rem;">{{ $upcomingEvents }}</h3>
-        <p style="color: #666;">Upcoming Events</p>
+    <div class="stat-card">
+        <div class="stat-number">{{ $upcomingEvents }}</div>
+        <div class="stat-label">Upcoming Events</div>
     </div>
-    <div class="card" style="text-align: center;">
-        <h3 style="font-size: 2.5rem; color: #2c5f2d; margin-bottom: 0.5rem;">{{ $totalVolunteers }}</h3>
-        <p style="color: #666;">Total Volunteers</p>
+    <div class="stat-card">
+        <div class="stat-number">{{ $totalVolunteers }}</div>
+        <div class="stat-label">Total Volunteers</div>
     </div>
-    <div class="card" style="text-align: center;">
-        <h3 style="font-size: 2.5rem; color: #2c5f2d; margin-bottom: 0.5rem;">{{ $totalBadges }}</h3>
-        <p style="color: #666;">Total Badges</p>
+    <div class="stat-card">
+        <div class="stat-number">{{ $totalBadges }}</div>
+        <div class="stat-label">Total Badges</div>
     </div>
 </div>
 
-<div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+<div class="content-card">
+    <div class="content-card-header">
         <h2>Recent Events</h2>
         <a href="{{ route('admin.events.create') }}" class="btn btn-primary">Create New Event</a>
     </div>
@@ -49,14 +52,14 @@
                 <td>{{ $event->location }}</td>
                 <td>{{ $event->joinedUsers()->count() }}</td>
                 <td>
-                    <a href="{{ route('admin.events.show', $event) }}" class="btn btn-primary" style="font-size: 0.875rem; padding: 0.375rem 0.75rem;">View</a>
+                    <a href="{{ route('admin.events.show', $event) }}" class="btn btn-primary btn-sm">View</a>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
     @else
-    <p style="text-align: center; color: #666; padding: 2rem 0;">No events created yet.</p>
+    <div class="no-data">No events created yet.</div>
     @endif
 </div>
 @endsection

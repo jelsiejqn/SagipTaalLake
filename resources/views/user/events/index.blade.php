@@ -1,46 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
 @section('title', 'All Events')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/Events.css') }}">
+@endpush
+
 @section('content')
-<h1 style="margin-bottom: 1.5rem;">Upcoming Events</h1>
+<div class="events-container">
+    <h1 class="events-title">Upcoming Events</h1>
 
-@if($upcomingEvents->count() > 0)
-<div class="grid grid-3">
-    @foreach($upcomingEvents as $event)
-    <div class="card">
-        <h3 style="margin-bottom: 0.5rem;">{{ $event->title }}</h3>
-        <p style="color: #666; margin-bottom: 0.5rem;">
-            <strong>Date:</strong> {{ $event->event_date->format('M d, Y h:i A') }}
-        </p>
-        <p style="color: #666; margin-bottom: 0.5rem;">
-            <strong>Location:</strong> {{ $event->location }}
-        </p>
-        @if($event->badge)
-        <p style="color: #2c5f2d; margin-bottom: 0.5rem;">
-            <strong>Badge:</strong> {{ $event->badge->name }}
-        </p>
-        @endif
-        <p style="margin-bottom: 1rem;">{{ Str::limit($event->description, 120) }}</p>
-
-        <div style="display: flex; gap: 0.5rem;">
-            <a href="{{ route('user.events.show', $event) }}" class="btn btn-primary">View Details</a>
-
-            @if(in_array($event->id, $userEventIds))
-            <span class="btn btn-secondary" style="cursor: default;">Joined</span>
-            @else
-            <form method="POST" action="{{ route('user.events.join', $event) }}" style="display: inline;">
-                @csrf
-                <button type="submit" class="btn btn-primary">Join Event</button>
-            </form>
-            @endif
+    @if($upcomingEvents->count() > 0)
+    <div class="events-grid">
+        @foreach($upcomingEvents as $event)
+        <div class="event-card" onclick="window.location='{{ route('user.events.show', $event) }}'" style="cursor: pointer;">
+            <div class="polaroid">
+                <div class="polaroid-image">
+                    @if($event->image)
+                    <img src="{{ $event->image }}" alt="{{ $event->title }}" />
+                    @else
+                    <img src="{{ asset('images/sample1.png') }}" alt="{{ $event->title }}" />
+                    @endif
+                </div>
+                <div class="polaroid-content">
+                    <h3>{{ $event->title }}</h3>
+                    <p>{{ Str::limit($event->description, 80) }}</p>
+                    <span class="event-date">{{ $event->event_date->format('M d, Y') }}</span>
+                </div>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
+    @else
+    <div class="no-events-message">
+        <h2>No upcoming events</h2>
+        <p>Check back soon for new events!</p>
+    </div>
+    @endif
 </div>
-@else
-<div class="card">
-    <p style="text-align: center; color: #666;">No upcoming events at the moment. Check back later!</p>
-</div>
-@endif
 @endsection

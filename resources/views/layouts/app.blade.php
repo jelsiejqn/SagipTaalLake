@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Sagip Taal Lake')</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ asset('css/Navbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    @stack('styles')
+    
     <style>
         * {
             margin: 0;
@@ -17,34 +24,6 @@
             line-height: 1.6;
             color: #333;
             background-color: #f4f4f4;
-        }
-
-        .navbar {
-            background-color: #2c5f2d;
-            color: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-        }
-
-        .navbar-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
         }
 
         .navbar-menu a {
