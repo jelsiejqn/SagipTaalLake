@@ -12,6 +12,7 @@
         padding: 1rem;
     }
 
+    /* Card Header */
     .card-header {
         display: flex;
         align-items: center;
@@ -20,13 +21,31 @@
         margin-bottom: 1rem;
     }
 
-    .card {
-        background: #fff;
-        border-radius: 10px;
-        padding: 1.25rem;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    .card-header a {
+        color: #2c5f2d;
+        text-decoration: none;
+        font-weight: 600;
     }
 
+    .card-header a:hover {
+        text-decoration: underline;
+    }
+
+    .card-header h1 {
+        margin: 0;
+        font-size: 1.25rem;
+        color: #2c5f2d;
+    }
+
+    /* Card */
+    .card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Form Grid */
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 320px;
@@ -39,12 +58,14 @@
         }
     }
 
+    /* Form Columns */
     .form-column {
         display: flex;
         flex-direction: column;
-        gap: 0.875rem;
+        gap: 1rem;
     }
 
+    /* Form Row */
     .form-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -57,6 +78,7 @@
         }
     }
 
+    /* Labels */
     label {
         display: block;
         font-weight: 600;
@@ -65,6 +87,7 @@
         font-size: 0.95rem;
     }
 
+    /* Inputs and Textareas */
     .form-control {
         width: 100%;
         padding: 0.6rem 0.75rem;
@@ -72,7 +95,7 @@
         border-radius: 8px;
         font-size: 0.95rem;
         background: #fff;
-        box-shadow: inset 0 1px 0 rgba(0,0,0,0.02);
+        box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.02);
     }
 
     textarea.form-control {
@@ -80,18 +103,21 @@
         resize: vertical;
     }
 
+    /* Error messages */
     .error-message {
         color: #c0392b;
         font-size: 0.875rem;
         margin-top: 0.35rem;
     }
 
+    /* Sidebar */
     .sidebar {
         display: flex;
         flex-direction: column;
         gap: 1rem;
     }
 
+    /* Image preview */
     .image-preview {
         background: #f8f9fa;
         border: 1px dashed #e1e1e1;
@@ -107,6 +133,7 @@
         object-fit: cover;
     }
 
+    /* Meta Box */
     .meta-box {
         background: #fcfcfc;
         border-radius: 8px;
@@ -116,10 +143,11 @@
         color: #444;
     }
 
+    /* Form Actions */
     .actions {
         display: flex;
         gap: 0.75rem;
-        margin-top: 0.25rem;
+        margin-top: 0.5rem;
     }
 
     .btn {
@@ -129,12 +157,18 @@
         cursor: pointer;
         font-weight: 600;
         font-size: 0.95rem;
+        text-decoration: none;
+        text-align: center;
     }
 
     .btn-primary {
         background: #2c5f2d;
         color: #fff;
-        box-shadow: 0 6px 18px rgba(44,95,45,0.08);
+        box-shadow: 0 6px 18px rgba(44, 95, 45, 0.08);
+    }
+
+    .btn-primary:hover {
+        background: #3b7850;
     }
 
     .btn-secondary {
@@ -143,6 +177,11 @@
         border: 1px solid #e8e8e8;
     }
 
+    .btn-secondary:hover {
+        background: #e2e5e8;
+    }
+
+    /* Hint text */
     .hint {
         font-size: 0.875rem;
         color: #6c757d;
@@ -154,8 +193,8 @@
 @section('content')
 <div class="edit-event-wrap">
     <div class="card-header">
-        <a href="{{ route('admin.events.index') }}" style="color: #2c5f2d; text-decoration: none; font-weight: 600;">&larr; Back to Events</a>
-        <h1 style="margin: 0; font-size: 1.25rem; color: #2c5f2d;">Create Event</h1>
+        <a href="{{ route('admin.events.index') }}">&larr; Back to Events</a>
+        <h1>Create Event</h1>
     </div>
 
     <div class="card">
@@ -191,7 +230,6 @@
                         </div>
                     </div>
 
-                    <!-- Max Volunteers + Image + Badge on same row -->
                     <div class="form-row">
                         <div>
                             <label for="max_volunteers">Maximum Volunteers</label>
@@ -213,21 +251,21 @@
                         <select id="badge_id" name="badge_id" class="form-control">
                             <option value="">No Badge</option>
                             @foreach($badges as $badge)
-                                <option value="{{ $badge->id }}" {{ old('badge_id') == $badge->id ? 'selected' : '' }}>
-                                    {{ $badge->name }}
-                                </option>
+                            <option value="{{ $badge->id }}" {{ old('badge_id') == $badge->id ? 'selected' : '' }}>
+                                {{ $badge->name }}
+                            </option>
                             @endforeach
                         </select>
                         @error('badge_id') <div class="error-message">{{ $message }}</div> @enderror
                     </div>
 
-                    <div class="actions" style="margin-top: 0.5rem;">
+                    <div class="actions">
                         <button type="submit" class="btn btn-primary">Create Event</button>
-                        <a href="{{ route('admin.events.index') }}" class="btn btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Cancel</a>
+                        <a href="{{ route('admin.events.index') }}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </div>
 
-                <!-- RIGHT: Sidebar with preview & meta -->
+                <!-- RIGHT: Sidebar -->
                 <aside class="sidebar">
                     <div class="image-preview" id="image-preview">
                         <div style="padding: 2rem; color: #6c757d;">No image selected</div>
@@ -235,7 +273,7 @@
 
                     <div class="meta-box">
                         <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
-                            <strong style="color:#2c5f2d">Note</strong>
+                            <strong>Note</strong>
                             <span>Preview</span>
                         </div>
                         <div style="font-size:0.95rem; color:#555;">
@@ -250,39 +288,39 @@
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const imageInput = document.getElementById('image');
-    const preview = document.getElementById('image-preview');
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageInput = document.getElementById('image');
+        const preview = document.getElementById('image-preview');
 
-    if (!imageInput || !preview) return;
+        if (!imageInput || !preview) return;
 
-    imageInput.addEventListener('change', function (e) {
-        preview.innerHTML = '';
-        const file = e.target.files[0];
-        if (!file) {
-            preview.innerHTML = '<div style="padding: 2rem; color: #6c757d;">No image selected</div>';
-            return;
-        }
+        imageInput.addEventListener('change', function(e) {
+            preview.innerHTML = '';
+            const file = e.target.files[0];
+            if (!file) {
+                preview.innerHTML = '<div style="padding: 2rem; color: #6c757d;">No image selected</div>';
+                return;
+            }
 
-        if (!file.type.startsWith('image/')) {
-            preview.innerHTML = '<div style="padding: 2rem; color: #c0392b;">Selected file is not an image.</div>';
-            return;
-        }
+            if (!file.type.startsWith('image/')) {
+                preview.innerHTML = '<div style="padding: 2rem; color: #c0392b;">Selected file is not an image.</div>';
+                return;
+            }
 
-        const img = document.createElement('img');
-        img.style.maxWidth = '100%';
-        img.style.maxHeight = '220px';
-        img.style.borderRadius = '6px';
-        img.style.objectFit = 'cover';
+            const img = document.createElement('img');
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '220px';
+            img.style.borderRadius = '6px';
+            img.style.objectFit = 'cover';
 
-        const reader = new FileReader();
-        reader.onload = function (ev) {
-            img.src = ev.target.result;
-            preview.appendChild(img);
-        };
-        reader.readAsDataURL(file);
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                img.src = ev.target.result;
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
     });
-});
 </script>
 @endpush
 @endsection
