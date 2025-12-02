@@ -15,13 +15,15 @@ class Badge extends Model
         'icon',
     ];
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_badges')
+                    ->withPivot('event_id', 'earned_at')
+                    ->withTimestamps();
+    }
+
     public function events()
     {
         return $this->hasMany(Event::class);
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'user_badges')->withPivot('event_id', 'earned_at')->withTimestamps();
     }
 }

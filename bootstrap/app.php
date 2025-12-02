@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
         ]);
+        
+        // Add middleware to update past events status automatically
+        $middleware->web(append: [
+            \App\Http\Middleware\UpdatePastEventsStatus::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

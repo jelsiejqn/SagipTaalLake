@@ -36,8 +36,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Event::class)->withPivot('status')->withTimestamps();
     }
 
-    public function badges()
-    {
-        return $this->belongsToMany(Badge::class, 'user_badges')->withPivot('event_id', 'earned_at')->withTimestamps();
-    }
+public function badges()
+{
+    return $this->belongsToMany(Badge::class, 'user_badges')
+                ->withPivot('event_id', 'earned_at')
+                ->withTimestamps();
+}
 }
