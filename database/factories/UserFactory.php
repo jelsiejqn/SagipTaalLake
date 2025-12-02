@@ -1,44 +1,94 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Seeders;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
+use App\Models\Badge;
+use App\Models\Event;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
-class UserFactory extends Factory
+class DatabaseSeeder extends Seeder
 {
-    /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
-
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    public function run(): void
     {
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ];
-    }
+        // Create admin user (safe)
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@sagiptaal.com'],
+            [
+                'name' => 'Admin User',
+                'password' => Hash::make('password'),
+                'is_admin' => true,
+            ]
+        );
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        // Create regular volunteer user (safe)
+        $volunteer = User::firstOrCreate(
+            ['email' => 'volunteer@example.com'],
+            [
+                'name' => 'John Volunteer',
+                'password' => Hash::make('password'),
+                'is_admin' => false,
+            ]
+        );
+
+        // Create badges (safe)
+        $badge1 = Badge::updateOrCreate(
+            ['name' => 'Lake Guardian'],
+            [
+                'description' => 'Awarded for participating in lake cleanup',
+                'icon' => '🌊',
+            ]
+        );
+
+        $badge2 = Badge::updateOrCreate(
+            ['name' => 'Tree Planter'],
+            [
+                'description' => 'Awarded for planting trees',
+                'icon' => '🌳',
+            ]
+        );
+
+        $badge3 = Badge::updateOrCreate(
+            ['name' => 'Community Hero'],
+            [
+                'description' => 'Awarded for community outreach',
+                'icon' => '⭐',
+            ]
+        );
+
+        // Create events (safe)
+        Event::updateOrCreate(
+            ['title' => 'Taal Lake Cleanup Drive'],
+            [
+                'description' => 'Join us in cleaning up the shores of Taal Lake. We will provide all necessary equipment. Bring your enthusiasm and let\'s make a difference together!',
+                'event_date' => now()->subDay(),
+                'location' => 'Taal Lake, Batangas',
+                'max_volunteers' => 50,
+                'badge_id' => $badge1->id,
+            ]
+        );
+
+        Event::updateOrCreate(
+            ['title' => 'Tree Planting Activity'],
+            [
+                'description' => 'Help us plant native trees around Taal Lake to restore the natural ecosystem and prevent soil erosion.',
+                'event_date' => now()->addDays(14),
+                'location' => 'Taal Volcano Island',
+                'max_volunteers' => 30,
+                'badge_id' => $badge2->id,
+            ]
+        );
+
+        Event::updateOrCreate(
+            ['title' => 'Community Awareness Seminar'],
+            [
+                'description' => 'Educational seminar about the importance of preserving Taal Lake and its surrounding environment.',
+                'event_date' => now()->addDays(21),
+                'location' => 'Talisay Municipal Hall',
+                'max_volunteers' => null,
+                'badge_id' => $badge3->id,
+            ]
+        );
     }
 }
