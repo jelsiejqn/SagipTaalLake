@@ -1,50 +1,75 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
-@section('title', 'Register')
+@section('title', 'Sign Up')
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/Signup.css') }}">
+@endpush
 
 @section('content')
-<div style="max-width: 500px; margin: 2rem auto;">
-    <div class="card">
-        <h2 style="margin-bottom: 1.5rem; text-align: center;">Register</h2>
-
-        <form method="POST" action="{{ route('register') }}">
+<section class="signup-section">
+    <div class="signup-container">
+        <h2 class="signup-title">Create your account</h2>
+        
+        <form class="signup-form" method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}" required autofocus>
-                @error('name')
-                <span class="error-message">{{ $message }}</span>
-                @enderror
+            <div class="name-grid">
+                <div>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Full Name"
+                        value="{{ old('name') }}"
+                        required
+                        autofocus
+                    />
+                    @error('name')
+                    <p class="error-text">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
+            <div>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value="{{ old('email') }}"
+                    required
+                />
                 @error('email')
-                <span class="error-message">{{ $message }}</span>
+                <p class="error-text">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control" required>
+            <div>
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                />
                 @error('password')
-                <span class="error-message">{{ $message }}</span>
+                <p class="error-text">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="form-group">
-                <label for="password_confirmation">Confirm Password</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
+            <div>
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    placeholder="Confirm Password"
+                    required
+                />
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
+            <button type="submit" class="signup-button">Sign Up</button>
         </form>
 
-        <p style="text-align: center; margin-top: 1rem;">
-            Already have an account? <a href="{{ route('login') }}" style="color: #2c5f2d;">Login here</a>
+        <p style="text-align: center; margin-top: 1rem; color: #666;">
+            Already have an account? <a href="{{ route('login') }}" style="color: #2c5f2d; text-decoration: none; font-weight: 500;">Login here</a>
         </p>
     </div>
-</div>
+</section>
 @endsection

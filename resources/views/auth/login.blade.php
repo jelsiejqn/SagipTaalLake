@@ -1,42 +1,52 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
 @section('title', 'Login')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/Login.css') }}">
+@endpush
+
 @section('content')
-<div style="max-width: 500px; margin: 2rem auto;">
-    <div class="card">
-        <h2 style="margin-bottom: 1.5rem; text-align: center;">Login</h2>
+<div class="login-container">
+    <div class="login-form">
+        <h2 class="login-title">Login</h2>
+
+        @if($errors->any())
+        <p class="error-message">{{ $errors->first() }}</p>
+        @endif
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <div class="form-group">
+            <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required autofocus>
-                @error('email')
-                <span class="error-message">{{ $message }}</span>
-                @enderror
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    placeholder="Enter your email"
+                    required
+                    autofocus
+                />
             </div>
 
-            <div class="form-group">
+            <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control" required>
-                @error('password')
-                <span class="error-message">{{ $message }}</span>
-                @enderror
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                />
             </div>
 
-            <div class="form-group">
-                <label>
-                    <input type="checkbox" name="remember"> Remember me
-                </label>
-            </div>
-
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            <button type="submit" class="login-btn">Login</button>
         </form>
 
-        <p style="text-align: center; margin-top: 1rem;">
-            Don't have an account? <a href="{{ route('register') }}" style="color: #2c5f2d;">Register here</a>
+        <p class="signup-link">
+            Don't have an account? <a href="{{ route('register') }}">Sign up</a>
         </p>
     </div>
 </div>

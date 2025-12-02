@@ -17,29 +17,32 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    protected $middleware = ['auth'];
-
     public function index()
     {
         $upcomingEvents = Event::where('event_date', '>=', now())
             ->orderBy('event_date', 'asc')
             ->get();
 
-        /** @var \App\Models\User $user */
-
-        $user = Auth::user();
-        $userEventIds = $user->events()->pluck('event_id')->toArray();
+        $userEventIds = [];
+        if (Auth::check()) {
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            $userEventIds = $user->events()->pluck('event_id')->toArray();
+        }
 
         return view('user.events.index', compact('upcomingEvents', 'userEventIds'));
     }
 
     public function show(Event $event)
     {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();   // ← You forgot this
-
-        $isJoined = $user->events()->where('event_id', $event->id)->exists();
+        $isJoined = false;
         $volunteersCount = $event->joinedUsers()->count();
+
+        if (Auth::check()) {
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            $isJoined = $user->events()->where('event_id', $event->id)->exists();
+        }
 
         return view('user.events.show', compact('event', 'isJoined', 'volunteersCount'));
     }

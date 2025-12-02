@@ -1,0 +1,477 @@
+/* Section 1 */
+
+.home-hero {
+  height: 140vh;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  color: white;
+}
+
+.home-h1 {
+    font-family: Century Gothic;
+    font-weight: 100;
+    color: white;
+}
+
+.home-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.home-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 80%;
+
+  transform: translateY(-20vh); 
+}
+
+
+.home-hero-content h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  line-height: 1;
+    animation: floatUp 1s ease-out forwards;
+    animation-delay: 0.3s;
+
+}
+
+.home-volunteer-btn {
+    font-family: Century Gothic;
+  padding: 12px 24px;
+  font-size: 14px;
+  background-color: #5e7f4d;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    animation: floatUp 1s ease-out forwards;
+    animation-delay: 0.6s;
+
+}
+
+.home-volunteer-btn:hover {
+  background-color: white;
+  color: #374331;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .home-hero {
+    padding: 20px;
+  }
+
+  .home-hero-content h1 {
+    font-size: 1.6rem;
+  }
+
+  .home-volunteer-btn {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+}
+
+/* Medium devices (tablets) */
+@media (max-width: 768px) {
+  .home-hero-content {
+    max-width: 90%;
+  }
+
+  .home-hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .home-volunteer-btn {
+    font-size: 13px;
+    padding: 11px 22px;
+  }
+}
+
+/* Large screens (desktops) */
+@media (min-width: 1024px) {
+  .home-hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .home-volunteer-btn {
+    font-size: 15px;
+    padding: 14px 28px;
+  }
+}
+
+
+/* Section 2 - HomeStats.css */
+
+/* Section 3 */
+
+.about-section {
+  padding: 40px 0;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;         
+  margin: 0;
+  padding: 0;
+  gap: 20px; /* reduced gap between image and content */
+}
+
+.about-image {
+  flex: 0 0 70%; /* sets image to ~45% of width */
+  padding: 0;
+  margin: 0;
+}
+
+.about-image img {
+  width: 100%; /* fill its container */
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.about-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-right: 40px; /* reduced from 100px */
+}
+
+.about-logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.about-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  font-family: Century Gothic, sans-serif;
+  color: #374331;
+}
+
+.about-text-title {
+  font-size: 2rem;
+  line-height: 1;
+  font-family: 'Century Gothic';
+  color: #374331;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .about-image {
+    transform: translate(-10%, 0);
+    flex: 0 0 100%;
+    width: 130%;
+  }
+
+  .about-content {
+    flex: 0 0 100%;
+    padding: 20px 0 0 0;
+  }
+
+  .about-logo {
+    margin: 0 auto 20px;
+  }
+}
+
+/* Section 4 */
+
+.faq-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 100px;
+  padding: 60px 40px;
+  flex-wrap: wrap; 
+  padding-bottom: 200px;
+}
+
+.faq-card {
+  perspective: 1000px;
+  max-width: 300px;
+  height: 350px;
+  flex: 1 1 400px;
+  font-family: Century Gothic;
+  font-weight: 100;
+}
+
+
+.faq-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.faq-card:hover .faq-inner {
+  transform: rotateY(180deg);
+}
+
+.faq-front, .faq-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.faq-front {
+  z-index: 2;
+}
+
+.faq-back {
+  transform: rotateY(180deg);
+}
+
+.faq-image {
+  width: 270px;
+  height: 270px;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.faq-question {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  color: #374331;
+}
+
+.faq-answer {
+  font-size: 0.95rem;
+  text-align: center;
+  color: #374331;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .faq-container {
+    justify-content: center;
+  }
+
+  .faq-card {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Section 5 Styles */
+.cards-section {
+  z-index: 1;
+  /* transform: translate(0%, -20%); */
+  padding: 50px 100px;
+  /* background-image: url(./assets/sample3.png); */
+  background-color: white;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;  /* Default gap between cards */
+  flex-wrap: wrap;
+}
+
+.card {
+  color: #374331;
+  position: relative;
+  min-height: 350px;  /* Set a fixed height for the cards */
+  width: 30%;
+  min-width: 250px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  background-color: white;  /* Make the card fully white on hover */
+}
+
+.card-image {
+  left: 10;
+  right: 0;
+  padding: 20px;
+  width: 100px;
+  height: 100px; /* Set a consistent height for images */
+  overflow: hidden; /* Prevent any overflow of the image */
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+    /* Make sure the image fills the container without stretching */
+}
+
+.card-content {
+  padding: 20px;  /* Increase the padding for better spacing */
+  text-align: center;
+  height: 100%;  /* Ensure content fills the remaining height of the card */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;  /* Make space between image and description */
+}
+
+.card-description {
+  font-size: 16px;
+  font-weight: bold;
+  color: #374331;
+}
+
+.card-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;  /* Dark background for text */
+  color: #374331;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  transition: opacity 0.3s ease-in-out;
+  text-align: center;
+}
+
+.card:hover .card-hover {
+  opacity: 1;
+}
+
+.card-hover-text {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .card {
+    width: 45%; /* 2 cards per row on medium screens */
+  }
+  .cards-container {
+    gap: 15px; /* Slightly smaller gap between cards */
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%; /* Stacks all cards vertically on small screens */
+    margin-bottom: 15px; /* Adds some space between stacked cards */
+  }
+  .cards-container {
+    justify-content: center; /* Centering cards when they stack */
+  }
+  .card-description {
+    font-size: 14px; /* Smaller text on small screens */
+  }
+  .card-hover-text {
+    font-size: 16px; /* Adjust hover text size */
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%; /* Full width cards on very small screens */
+  }
+  .card-description {
+    font-size: 12px; /* Even smaller text on very small screens */
+  }
+  .card-hover-text {
+    font-size: 14px; /* Smaller hover text on very small screens */
+  }
+}
+
+/* Section 6 */
+
+.section-6 {
+  font-family: "Century Gothic", sans-serif;
+  color: #374331;
+}
+
+.section-6-row {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.section-6-row.image-left-row {
+  flex-direction: row; /* Explicitly sets image on left, text on right */
+}
+
+.section-6-text {
+  flex: 1;
+  min-width: 50px;
+}
+
+.section-6-image {
+  max-width: 980px;
+}
+
+.section-6-text {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-6-text h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.section-6-text p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.section-6-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

@@ -1,0 +1,116 @@
+.login-container {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(../images/bg.png); /* Light green background */
+    margin: 0;
+  }.login-form {
+  background-color: #fff;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Increased shadow for depth */
+  border-radius: 20px; /* Slightly more rounded corners */
+  max-width: 400px;
+  width: 100%;
+  margin: 20px;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #374331; /* Dark green text */
+  font-family: 'Roboto', sans-serif;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  font-size: 1rem;
+  color: #374331; /* Dark green label */
+  margin-bottom: 0.5rem;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid white; /* Light green border */
+  border-radius: 20px;
+  outline: none;
+  background-color: #eaf9e5;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ✅ Focused input — removes blue glow */
+.input-group input:focus {
+  border-color: #374331; /* Dark green border on focus */
+  box-shadow: none;      /* Removes the default blue outline */
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #374331;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+.login-btn:hover {
+  background-color: #374331; /* Darker green on hover */
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.signup-link {
+  font-family: Century Gothic;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.signup-link a {
+  color: #374331;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.signup-link a:hover {
+  text-decoration: none;
+  opacity: 60%;
+}
+
+/* Add these styles to your Login.css file */
+
+.admin-login-link {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.admin-login-link a {
+  color: #4a6fa5;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.admin-login-link a:hover {
+  text-decoration: none;
+  opacity: 60%;
+}

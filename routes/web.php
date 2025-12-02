@@ -23,14 +23,17 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// User routes
+// User routes - Public access to view events
+Route::get('/events', [UserEventController::class, 'index'])->name('user.events.index');
+Route::get('/events/{event}', [UserEventController::class, 'show'])->name('user.events.show');
+
+// User routes - Auth required
 Route::middleware('auth')->group(function () {
-    Route::get('/events', [UserEventController::class, 'index'])->name('user.events.index');
-    Route::get('/events/{event}', [UserEventController::class, 'show'])->name('user.events.show');
     Route::post('/events/{event}/join', [UserEventController::class, 'join'])->name('user.events.join');
     Route::post('/events/{event}/cancel', [UserEventController::class, 'cancel'])->name('user.events.cancel');
     Route::get('/my-events', [UserEventController::class, 'myEvents'])->name('user.events.my-events');
     Route::get('/my-badges', [UserBadgeController::class, 'index'])->name('user.badges.index');
+    Route::get('/account', [HomeController::class, 'account'])->name('user.account');
 });
 
 // Admin routes

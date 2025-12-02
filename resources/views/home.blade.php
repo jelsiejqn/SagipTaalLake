@@ -1,44 +1,178 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
 @section('title', 'Home - Sagip Taal Lake')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/Home.css') }}">
+<link rel="stylesheet" href="{{ asset('css/HomeStats.css') }}">
+@endpush
+
 @section('content')
-<div class="card">
-    <h1 style="color: #2c5f2d; margin-bottom: 1rem;">Welcome to Sagip Taal Lake</h1>
-    <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
-        Join us in our mission to protect and preserve Taal Lake. Volunteer for environmental events and make a difference!
-    </p>
+<div class="home">
+    <!-- Section 1 - Hero -->
+    <section class="home-hero" style="background-image: url('{{ asset('images/home_bg.png') }}')">
+        <div class="home-hero-content">
+            <h1 class="home-h1">🌱 <br /> Your hands can heal.<br />Volunteer to plant <br /> a Tree Today!</h1>
+            <button class="home-volunteer-btn" onclick="window.location='{{ route('user.events.index') }}'">Volunteer Now</button>
+        </div>
+    </section>
 
-    @guest
-    <div style="display: flex; gap: 1rem;">
-        <a href="{{ route('register') }}" class="btn btn-primary">Get Started</a>
-        <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
-    </div>
-    @else
-    <a href="{{ route('user.events.index') }}" class="btn btn-primary">View All Events</a>
-    @endguest
-</div>
+    <!-- Section 2 - Stats -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stats-card">
+                <img src="{{ asset('images/icon_volunteers.png') }}" alt="Volunteers Strong!" class="stats-icon" />
+                <h2 class="stats-number">78</h2>
+                <h3 class="stats-title">Volunteers Strong!</h3>
+                <p class="stats-description">Community members who signed up to make a difference, one tree at a time.</p>
+            </div>
+            <div class="stats-card">
+                <img src="{{ asset('images/icon_plant.png') }}" alt="Trees Planted" class="stats-icon" />
+                <h2 class="stats-number">354</h2>
+                <h3 class="stats-title">Trees Planted</h3>
+                <p class="stats-description">Our ever-growing forest thanks to your support and dedication.</p>
+            </div>
+            <div class="stats-card">
+                <img src="{{ asset('images/icon_action.png') }}" alt="Barangays Reached" class="stats-icon" />
+                <h2 class="stats-number">12</h2>
+                <h3 class="stats-title">Barangays Reached</h3>
+                <p class="stats-description">Across the region, we've started healing one patch at a time.</p>
+            </div>
+        </div>
+    </section>
 
-@if($upcomingEvents->count() > 0)
-<h2 style="margin-top: 2rem; margin-bottom: 1rem;">Upcoming Events</h2>
-<div class="grid grid-3">
-    @foreach($upcomingEvents as $event)
-    <div class="card">
-        <h3 style="margin-bottom: 0.5rem;">{{ $event->title }}</h3>
-        <p style="color: #666; margin-bottom: 0.5rem;">
-            <strong>Date:</strong> {{ $event->event_date->format('M d, Y h:i A') }}
-        </p>
-        <p style="color: #666; margin-bottom: 1rem;">
-            <strong>Location:</strong> {{ $event->location }}
-        </p>
-        <p style="margin-bottom: 1rem;">{{ Str::limit($event->description, 100) }}</p>
-        @auth
-        <a href="{{ route('user.events.show', $event) }}" class="btn btn-primary">View Details</a>
+    <!-- Section 3 - About -->
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="{{ asset('images/img-about.png') }}" alt="Org Visual" />
+            </div>
+            <div class="about-content">
+                <img src="{{ asset('images/img-logo.png') }}" alt="Org Logo" class="about-logo" />
+                <p class="about-text-title">About Sagip Taal <br /> Lake (SaTaLa)</p>
+                <p class="about-text">
+                    Sagip Taal Lake (SaTaLa) is a non-governmental organization that aims to bring awareness and solutions to reduce Taal Lake's pollution through community involvement and education.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5 - Cards -->
+    <section class="cards-section">
+        <div class="cards-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ asset('images/about-3.png') }}" alt="Event Image 1" class="about-img"/>
+                </div>
+                <div class="card-content">
+                    <p class="card-description"> <br /> <br />About the Founder <br /> of Sagip Taal Lake</p>
+                </div>
+                <div class="card-hover">
+                    <p class="card-hover-text">
+                        Nelson Terrible, a native of Talisay, Batangas, is deeply passionate about his hometown's natural beauty. To support it, he built a 12-hectare, 224-room resort called Club Balai Isabel. Despite his efforts to help with local solid waste management, he realized that school visits and cleanups weren't enough. Due to the size of his business, he took on the responsibility of managing the resort's waste, aware that the local government couldn't handle the large amount generated by his resort.
+                    </p>
+                </div>
+            </div>
+
+            <br /> <br />
+
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ asset('images/about-1.png') }}" alt="Event Image 2" class="about-img" />
+                </div>
+                <div class="card-content">
+                    <p class="card-description"> <br /> <br />The Wake Up Call of <br /> Sagip Taal Lake</p>
+                </div>
+                <div class="card-hover">
+                    <p class="card-hover-text">
+                        During the pandemic of 2020, heavy monsoon rains in August flushed the waterways that led into the lake, expelling an incredible amount of trash all in one go. The lake looked like a garbage dump with Taal Volcano as the backdrop. Witnessing this led concerned citizens to take concrete action.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ asset('images/about-2.png') }}" alt="Event Image 2" class="about-img"/>
+                </div>
+                <div class="card-content">
+                    <p class="card-description"> <br /> <br />The Project that Started <br /> It all</p>
+                </div>
+                <div class="card-hover">
+                    <p class="card-hover-text">
+                        The first project of SaTaLa was Pera Sa Basura, a program that gives the community an incentive to segregate waste. Segregated waste is in turn bought by a few different junk dealers. As a result of this project, the LGU has reported a reduction of dump truck loads of trash per week from 7 to 2. By any standards, this is significant, and an important milestone in the efforts of the organization.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6 - Mission & Vision -->
+    <section class="section-6">
+        <!-- Row 1 - Image Right, Text Left -->
+        <div class="section-6-row">
+            <div class="section-6-text">
+                <h2>Sagip Taal Lake is Counting on You!</h2>
+                <p>
+                    "We need people on the ground, we need them to do the work," says Nelson. "If they want to donate trash cans, they have to purchase the trash cans, deliver them, and help with the installation. We value participation more than anything." They know that it's that personal labor of of love that they have put in that is making SaTaLa work so well, and that it has worked without cash being put in.
+                </p>
+            </div>
+            <div class="section-6-image">
+                <img src="{{ asset('images/about-pic2.png') }}" alt="Mission Visual" />
+            </div>
+        </div>
+
+        <!-- Row 2 - Image Left, Text Right -->
+        <div class="section-6-row image-left-row">
+            <div class="section-6-image">
+                <img src="{{ asset('images/about-pic1.png') }}" alt="Vision Visual" />
+            </div>
+            <div class="section-6-text">
+                <h2>Taal Lake Needs You!</h2>
+                <p>
+                    Everything is purely voluntary. The group brainstorms on how to execute their projects such as Ampon baybay lawa at ilog, and Pera sa Basura, then they sign up their groups to implement them. Corporate sponsors are welcome, but must earn their trust and respect, being aware that this is a community-driven effort that is very personal to the Talisenos.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4 - FAQ -->
+    <br /> <br /> <br /> <br />
+    <center>
+        <h1>Frequently Asked Questions</h1>
+    </center>
+    <div class="faq-container">
+        @if(isset($faqs) && count($faqs) > 0)
+            @foreach($faqs as $faq)
+            <div class="faq-card">
+                <div class="faq-inner">
+                    <div class="faq-front">
+                        @if($faq->image_url)
+                            <img src="{{ $faq->image_url }}" alt="{{ $faq->question }}" class="faq-image" loading="lazy" />
+                        @else
+                            @php
+                                $defaultImages = ['faq-img2.png', 'faq-img3.png', 'faq-img1.png'];
+                                $imageIndex = ($faq->display_order % 3);
+                                $imageName = $defaultImages[$imageIndex];
+                            @endphp
+                            <img src="{{ asset('images/' . $imageName) }}" alt="{{ $faq->question }}" class="faq-image" loading="lazy" />
+                        @endif
+                        <p class="faq-question">{{ $faq->question }}</p>
+                    </div>
+                    <div class="faq-back">
+                        <p class="faq-answer">{{ $faq->answer }}</p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
         @else
-        <a href="{{ route('login') }}" class="btn btn-primary">Login to Join</a>
-        @endauth
+            <div class="faq-empty">
+                <p>🔍 No FAQs available at the moment.</p>
+                <p>Check back soon for helpful information!</p>
+            </div>
+        @endif
     </div>
-    @endforeach
 </div>
-@endif
 @endsection
