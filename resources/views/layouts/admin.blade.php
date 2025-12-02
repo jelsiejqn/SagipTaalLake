@@ -59,7 +59,8 @@
             transition: background-color 0.3s;
         }
 
-        .admin-navbar-menu a:hover {
+        .admin-navbar-menu a:hover,
+        .admin-navbar-menu a.active {
             background-color: rgba(255, 255, 255, 0.1);
         }
 
@@ -87,6 +88,9 @@
 
         .admin-header {
             margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .admin-header h1 {
@@ -176,6 +180,33 @@
             background-color: #1e4420;
         }
 
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
         .btn-sm {
             padding: 0.375rem 0.75rem;
             font-size: 0.875rem;
@@ -242,9 +273,10 @@
             <span>🌱</span> SaTaLa Admin
         </a>
         <ul class="admin-navbar-menu">
-            <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ route('admin.events.index') }}">Events</a></li>
-            <li><a href="{{ route('admin.badges.index') }}">Badges</a></li>
+            <li><a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a></li>
+            <li><a href="{{ route('admin.events.index') }}" class="{{ request()->routeIs('admin.events.*') ? 'active' : '' }}">Events</a></li>
+            <li><a href="{{ route('admin.badges.index') }}" class="{{ request()->routeIs('admin.badges.*') ? 'active' : '' }}">Badges</a></li>
+            <li><a href="{{ route('admin.faqs.index') }}" class="{{ request()->routeIs('admin.faqs.*') ? 'active' : '' }}">FAQs</a></li>
             <li><a href="{{ route('home') }}">View Site</a></li>
             <li>
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">

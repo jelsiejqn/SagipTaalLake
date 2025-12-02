@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Badge;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -32,7 +33,13 @@ class EventController extends Controller
             'location' => 'required|string|max:255',
             'max_volunteers' => 'nullable|integer|min:1',
             'badge_id' => 'nullable|exists:badges,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('events', 'public');
+            $validated['image'] = $path;
+        }
 
         Event::create($validated);
 
@@ -60,7 +67,19 @@ class EventController extends Controller
             'location' => 'required|string|max:255',
             'max_volunteers' => 'nullable|integer|min:1',
             'badge_id' => 'nullable|exists:badges,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        // Handle new image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($event->image && Storage::disk('public')->exists($event->image)) {
+                Storage::disk('public')->delete($event->image);
+            }
+            
+            $path = $request->file('image')->store('events', 'public');
+            $validated['image'] = $path;
+        }
 
         $event->update($validated);
 
@@ -69,7 +88,13 @@ class EventController extends Controller
 
     public function destroy(Event $event)
     {
+        // Delete associated image if exists
+        if ($event->image && Storage::disk('public')->exists($event->image)) {
+            Storage::disk('public')->delete($event->image);
+        }
+        
         $event->delete();
+        
         return redirect()->route('admin.events.index')->with('success', 'Event deleted successfully!');
     }
 }

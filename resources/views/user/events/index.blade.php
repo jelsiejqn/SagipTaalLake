@@ -17,9 +17,9 @@
             <div class="polaroid">
                 <div class="polaroid-image">
                     @if($event->image)
-                    <img src="{{ $event->image }}" alt="{{ $event->title }}" />
+                        <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}" />
                     @else
-                    <img src="{{ asset('images/sample1.png') }}" alt="{{ $event->title }}" />
+                        <img src="{{ asset('images/sample1.png') }}" alt="{{ $event->title }}" />
                     @endif
                 </div>
                 <div class="polaroid-content">

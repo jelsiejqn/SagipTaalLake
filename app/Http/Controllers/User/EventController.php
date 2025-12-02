@@ -13,13 +13,12 @@ use Illuminate\Support\Facades\Auth;
  * @method \Illuminate\Database\Eloquent\Relations\BelongsToMany events()
  */
 
-
-
 class EventController extends Controller
 {
     public function index()
     {
-        $upcomingEvents = Event::where('event_date', '>=', now())
+        $upcomingEvents = Event::with('badge')
+            ->where('event_date', '>=', now())
             ->orderBy('event_date', 'asc')
             ->get();
 
@@ -35,6 +34,8 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
+        $event->load('badge', 'joinedUsers');
+        
         $isJoined = false;
         $volunteersCount = $event->joinedUsers()->count();
 
@@ -46,7 +47,6 @@ class EventController extends Controller
 
         return view('user.events.show', compact('event', 'isJoined', 'volunteersCount'));
     }
-
 
     public function join(Event $event)
     {

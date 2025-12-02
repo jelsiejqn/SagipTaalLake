@@ -16,6 +16,7 @@ class Event extends Model
         'location',
         'max_volunteers',
         'badge_id',
+        'image', 
     ];
 
     protected $casts = [
