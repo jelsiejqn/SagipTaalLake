@@ -2,11 +2,9 @@
 
 @section('title', 'All Events')
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('css/Events.css') }}">
-@endpush
-
 @section('content')
+<br> <br> <br>
+<br>
 <div class="events-container">
     <h1 class="events-title">Upcoming Events</h1>
 
@@ -17,9 +15,9 @@
             <div class="polaroid">
                 <div class="polaroid-image">
                     @if($event->image)
-                        <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}" />
+                    <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}" />
                     @else
-                        <img src="{{ asset('images/sample1.png') }}" alt="{{ $event->title }}" />
+                    <img src="{{ asset('images/sample1.png') }}" alt="{{ $event->title }}" />
                     @endif
                 </div>
                 <div class="polaroid-content">
@@ -38,4 +36,115 @@
     </div>
     @endif
 </div>
+
+<br> <br> <br>
+<br> <br>
+
+<style>
+    .events-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .events-title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #486848ff;
+        /* olive green */
+    }
+
+    .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+    }
+
+    /* Polaroid Card */
+    .event-card {
+        background: white;
+        border-radius: 30px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .event-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .polaroid {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .polaroid-image {
+        height: 200px;
+        /* fixed image height */
+        overflow: hidden;
+    }
+
+    .polaroid-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 30px 30px 0 0;
+        transition: transform 0.3s;
+    }
+
+    .polaroid-image img:hover {
+        transform: scale(1.05);
+    }
+
+    .polaroid-content {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .polaroid-content h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.2rem;
+        color: #486848ff;
+    }
+
+    .polaroid-content p {
+        margin: 0 0 10px 0;
+        font-size: 0.95rem;
+        color: #555;
+    }
+
+    .event-date {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #60856cff;
+        /* lighter olive green */
+    }
+
+    /* No events message */
+    .no-events-message {
+        text-align: center;
+        padding: 50px 20px;
+        color: #486848ff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .polaroid-content h3 {
+            font-size: 1rem;
+        }
+
+        .polaroid-content p {
+            font-size: 0.9rem;
+        }
+
+        .event-date {
+            font-size: 0.8rem;
+        }
+    }
+</style>
 @endsection
