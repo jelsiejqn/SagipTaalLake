@@ -9,6 +9,7 @@ use App\Http\Controllers\User\BadgeController as UserBadgeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\BadgeController as AdminBadgeController;
+use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 
 // Guest routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -42,4 +43,5 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::resource('events', AdminEventController::class);
     Route::resource('badges', AdminBadgeController::class);
+    Route::resource('faqs', AdminFaqController::class);
 });

@@ -37,6 +37,7 @@
         width: 100%;
         height: auto;
         border-radius: 8px;
+        object-fit: cover;
     }
 
     .modal-details h2 {
@@ -101,19 +102,24 @@
 
 @section('content')
 <div class="event-detail-container">
-    <a href="{{ route('user.events.index') }}" class="back-link">&larr; Back to Events</a>
+    <!-- Back to Events -->
+    <a href="{{ url('/events') }}" class="back-link">&larr; Back to Events</a>
 
     <div class="modal-grid">
+        <!-- Event Image -->
         <div class="modal-image">
             @if($event->image)
-            <img src="{{ $event->image }}" alt="{{ $event->title }}" />
+                <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}" />
             @else
-            <img src="{{ asset('images/sample1.png') }}" alt="{{ $event->title }}" />
+                <img src="{{ asset('images/sample1.png') }}" alt="{{ $event->title }}" />
             @endif
         </div>
+
+        <!-- Event Details -->
         <div class="modal-details">
             <h2>{{ $event->title }}</h2>
             <p class="modal-description">{{ $event->description }}</p>
+
             <div class="modal-datetime">
                 <p><strong>Date:</strong> {{ $event->event_date->format('l, F d, Y') }}</p>
                 <p><strong>Time:</strong> {{ $event->event_date->format('h:i A') }}</p>
@@ -121,6 +127,7 @@
                 <p><strong>Volunteers:</strong> {{ $volunteersCount }}@if($event->max_volunteers) / {{ $event->max_volunteers }}@endif</p>
             </div>
 
+            <!-- Volunteer Buttons -->
             <div class="modal-buttons">
                 @auth
                     @if($isJoined)
