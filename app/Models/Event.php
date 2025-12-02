@@ -23,18 +23,33 @@ class Event extends Model
         'event_date' => 'datetime',
     ];
 
+    // All users regardless of status
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('status')->withTimestamps();
+        return $this->belongsToMany(User::class, 'event_user')
+                    ->withPivot('status')
+                    ->withTimestamps();
     }
 
+    // Badge relationship
     public function badge()
     {
         return $this->belongsTo(Badge::class);
     }
 
+    // Only users who have joined (not cancelled)
     public function joinedUsers()
     {
-        return $this->belongsToMany(User::class)->wherePivot('status', 'joined')->withTimestamps();
+        return $this->belongsToMany(User::class, 'event_user')
+                    ->wherePivot('status', 'joined')
+                    ->withTimestamps();
+    }
+
+    // Users who joined OR completed (for counting volunteers)
+    public function activeUsers()
+    {
+        return $this->belongsToMany(User::class, 'event_user')
+                    ->whereIn('event_user.status', ['joined', 'completed'])
+                    ->withTimestamps();
     }
 }

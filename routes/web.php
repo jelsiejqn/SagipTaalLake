@@ -42,6 +42,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('events', AdminEventController::class);
-    Route::resource('badges', AdminBadgeController::class);
     Route::resource('faqs', AdminFaqController::class);
+     Route::resource('badges', AdminBadgeController::class)->except(['show']);
 });

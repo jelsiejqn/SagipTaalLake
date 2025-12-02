@@ -20,8 +20,8 @@
         @if($badge->description)
         <p style="color: #666; font-size: 0.875rem; margin-bottom: 0.5rem;">{{ $badge->description }}</p>
         @endif
-        <p style="color: #2c5f2d; font-size: 0.875rem;">
-            Earned: {{ $badge->pivot->earned_at->format('M d, Y') }}
+        <p style="color: #2c5f2d; font-size: 0.875rem; font-weight: bold;">
+            ✓ Earned: {{ \Carbon\Carbon::parse($badge->pivot->earned_at)->format('M d, Y') }}
         </p>
     </div>
     @endforeach
